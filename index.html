@@ -3,326 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIKAZO TOP UP - Premium Gaming Portal</title>
-    <!-- Tailwind CSS -->
+    <title>MIKAZO TOP UP - Sri Lanka's #1 Game Top-Up Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-        .hero-bg {
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800');
-            background-size: cover; background-position: center;
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
         }
-        .gradient-btn { background: linear-gradient(90deg, #2563eb, #06b6d4); }
-        .gradient-btn:hover { background: linear-gradient(90deg, #1d4ed8, #0891b2); }
+        .hero-bg {
+            background: linear-gradient(rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.96)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800');
+            background-size: cover;
+            background-position: center;
+        }
+        .gradient-btn {
+            background: linear-gradient(90deg, #2563eb, #06b6d4);
+        }
+        .gradient-btn:hover {
+            background: linear-gradient(90deg, #1d4ed8, #0891b2);
+        }
+        /* Package Selection Styling */
+        .package-card.selected {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800 min-h-screen flex justify-center items-start">
 
-    <!-- App Container -->
     <div class="w-full max-w-md bg-white min-h-screen shadow-2xl border-x border-slate-200 flex flex-col justify-between relative">
         
-        <!-- Main Content Area -->
-        <div class="pb-32">
-            <!-- HEADER -->
+        <div class="pb-36">
+            
             <header class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b border-slate-100 px-4 py-3.5 flex justify-between items-center">
-                <div class="flex items-center space-x-2.5">
+                <div class="flex items-center space-x-2.5" onclick="showLandingPage()" class="cursor-pointer">
                     <div class="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-white font-black text-lg tracking-tighter">M</div>
                     <div>
                         <span class="font-black text-lg tracking-tight text-slate-900 block leading-none">MIKAZO</span>
                         <span class="text-[9px] tracking-widest text-slate-400 font-bold block mt-0.5">MIKAZOTOPUP.COM</span>
                     </div>
                 </div>
-                <button class="text-slate-700 hover:text-slate-900 text-xl"><i class="fa-solid fa-bars"></i></button>
+                <button class="text-slate-700 hover:text-slate-900 text-xl focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </header>
 
-            <!-- HERO VIEW -->
-            <div id="main-landing-view">
-                <section class="hero-bg text-white text-center px-6 py-14 relative overflow-hidden">
-                    <span class="inline-flex items-center bg-blue-950/70 border border-blue-500/30 text-blue-400 text-[11px] font-bold tracking-wider px-3.5 py-1 rounded-full mb-4 uppercase">
-                        Sri Lanka's #1 Game Top-Up Platform
+            <div id="view-landing-page">
+                <section class="hero-bg text-white text-center px-6 py-16 relative overflow-hidden">
+                    <div class="absolute top-8 right-8 opacity-20 text-cyan-400 text-5xl animate-bounce"><i class="fa-solid fa-gem"></i></div>
+                    <div class="absolute bottom-12 left-6 opacity-15 text-blue-400 text-3xl"><i class="fa-solid fa-gem"></i></div>
+                    
+                    <span class="inline-flex items-center bg-blue-950/70 border border-blue-500/30 text-blue-400 text-[11px] font-bold tracking-wider px-3.5 py-1 rounded-full mb-5 uppercase">
+                        <span class="w-2 h-2 rounded-full bg-blue-500 mr-2 animate-pulse"></span> Sri Lanka's #1 Game Top-Up Platform
                     </span>
-                    <h1 class="text-4xl font-black tracking-tight mb-3 text-white leading-tight">MIKAZO <br><span class="text-cyan-400">TOPUP</span></h1>
-                    <p class="text-slate-300 text-xs leading-relaxed mb-6 max-w-xs mx-auto">Premium game top-ups at unbeatable prices — instant delivery.</p>
+                    <h1 class="text-5xl font-black tracking-tight mb-3 text-white leading-tight">
+                        MIKAZO <br><span class="text-cyan-400">TOPUP</span>
+                    </h1>
+                    <p class="text-slate-300 text-xs leading-relaxed mb-8 max-w-xs mx-auto">
+                        Premium game top-ups at <strong class="text-white font-semibold">unbeatable prices</strong> — instant delivery, trusted by thousands of Sri Lankan gamers.
+                    </p>
                     <div class="flex flex-col space-y-3 max-w-xs mx-auto">
-                        <button onclick="navigateToTopUp()" class="gradient-btn text-white font-bold text-xs tracking-wider py-3.5 rounded-xl shadow-lg flex items-center justify-center space-x-2">
+                        <button onclick="switchToTopUpView()" class="gradient-btn text-white font-bold text-xs tracking-wider py-3.5 rounded-xl shadow-lg shadow-cyan-500/20 flex items-center justify-center space-x-2">
                             <i class="fa-solid fa-bolt text-yellow-400"></i> <span>TOP UP NOW</span>
                         </button>
                     </div>
                 </section>
+
+                <section class="px-5 py-12 bg-white">
+                    <div class="text-center mb-8">
+                        <h2 class="text-2xl font-black text-slate-900">Our Premium <span class="text-blue-600">Services</span></h2>
+                        <p class="text-slate-400 text-xs mt-1">Elevate your gaming experience with our top-tier digital services</p>
+                    </div>
+                    <div class="space-y-5">
+                        <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm text-center flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-2xl mb-3"><i class="fa-solid fa-gamepad"></i></div>
+                            <h3 class="text-base font-bold text-slate-900 mb-1">Game TopUp</h3>
+                            <p class="text-slate-400 text-xs px-4 mb-4">Instant in-game currency delivered directly to your account credentials</p>
+                            <button onclick="switchToTopUpView()" class="gradient-btn text-white text-[11px] font-bold px-5 py-2.5 rounded-xl shadow-sm">SHOP NOW</button>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm text-center flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-full bg-cyan-50 flex items-center justify-center text-cyan-500 text-2xl mb-3"><i class="fa-solid fa-credit-card"></i></div>
+                            <h3 class="text-base font-bold text-slate-900 mb-1">Cards</h3>
+                            <p class="text-slate-400 text-xs px-4 mb-4">Garena Shells, Bot Recharge Codes & gift vouchers at local rates</p>
+                            <button onclick="switchToTopUpView()" class="gradient-btn text-white text-[11px] font-bold px-5 py-2.5 rounded-xl shadow-sm">SHOP NOW</button>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm text-center flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500 text-2xl mb-3"><i class="fa-solid fa-palette"></i></div>
+                            <h3 class="text-base font-bold text-slate-900 mb-1">Post Designs</h3>
+                            <p class="text-slate-400 text-xs px-4 mb-4">Custom banners, logos, and high quality branding graphics</p>
+                            <button class="gradient-btn text-white text-[11px] font-bold px-5 py-2.5 rounded-xl shadow-sm">CREATE NOW</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="px-5 py-8 bg-slate-50 border-y border-slate-100">
+                    <div class="grid grid-cols-2 gap-3.5">
+                        <div class="bg-white rounded-xl p-4 border border-slate-100 text-center shadow-sm">
+                            <span class="block text-xl font-black text-blue-600">5,000+</span>
+                            <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Happy Customers</span>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 border border-slate-100 text-center shadow-sm">
+                            <span class="block text-xl font-black text-cyan-500">99%</span>
+                            <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Success Rate</span>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 border border-slate-100 text-center shadow-sm">
+                            <span class="block text-xl font-black text-sky-600">200+</span>
+                            <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Daily Orders</span>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 border border-slate-100 text-center shadow-sm">
+                            <span class="block text-xl font-black text-indigo-600">2s</span>
+                            <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Instant Delivery</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="px-5 py-12 bg-white">
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 shadow-sm relative">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-white font-bold text-xs">YD</div>
+                            <div>
+                                <h4 class="font-bold text-xs text-slate-900">YDTECH2008</h4>
+                                <span class="text-[10px] text-slate-400 block">🇱🇰 Colombo, Sri Lanka</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-500 text-xs italic leading-relaxed">"Process was secure and easy to understand. My top-up was delivered instantly without any issues."</p>
+                    </div>
+                </section>
+
+                <section class="px-5 py-12 bg-slate-50/50 border-t border-slate-100">
+                    <div class="text-center mb-8">
+                        <span class="text-[10px] font-bold text-blue-600 tracking-widest uppercase block">— WHY MIKAZO —</span>
+                        <h2 class="text-2xl font-black text-slate-900 mt-1">The Best Top-Up Experience</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-xl p-4.5 border border-slate-100 shadow-xs">
+                            <h3 class="text-xs font-bold text-slate-900 mb-1"><i class="fa-solid fa-bolt text-yellow-400 mr-1.5"></i> Automated Delivery</h3>
+                            <p class="text-slate-400 text-[11px]">Direct integration guarantees premium points instantly inside accounts via safe APIs.</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-4.5 border border-slate-100 shadow-xs">
+                            <h3 class="text-xs font-bold text-slate-900 mb-1"><i class="fa-solid fa-shield-halved text-blue-500 mr-1.5"></i> Safe UID Processing</h3>
+                            <p class="text-slate-400 text-[11px]">We never request account passwords. Verification requires game connection identities only.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-slate-900 text-white px-5 py-12 text-center">
+                    <span class="text-[10px] font-bold text-cyan-400 tracking-widest uppercase block mb-1">— PARTNER WITH US —</span>
+                    <h2 class="text-2xl font-black mb-6">Reseller Program</h2>
+                    <div class="bg-slate-800/60 border border-slate-700/40 rounded-2xl p-5 mb-4">
+                        <h3 class="text-sm font-bold text-white mb-2">Become an Authorized Reseller</h3>
+                        <p class="text-slate-400 text-[11px] mb-4">Gain premium access to special agency catalog markdowns with automated order adjustments.</p>
+                        <button class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-bold px-6 py-2.5 rounded-xl">REGISTER NOW</button>
+                    </div>
+                    <div class="bg-slate-800/60 border border-slate-700/40 rounded-2xl p-5">
+                        <h3 class="text-sm font-bold text-white mb-2">Reseller Portal Access</h3>
+                        <p class="text-slate-400 text-[11px] mb-4">Manage agency accounts, funding logs, and order balance trackers seamlessly.</p>
+                        <button class="bg-slate-700 text-white text-xs font-bold px-8 py-2.5 rounded-xl">LOGIN</button>
+                    </div>
+                </section>
             </div>
 
-            <!-- GAME SELECTION CENTER (Screenshot_20260603-150248.jpg) -->
-            <section id="game-center" class="px-4 py-8 bg-white">
-                <div class="text-center mb-6">
-                    <h2 class="text-xl font-black text-slate-900">Game Top-up Center</h2>
-                    <p class="text-slate-400 text-xs mt-1">The fastest and most secure way to top up.</p>
-                </div>
 
-                <!-- Search Bar -->
-                <div class="relative mb-6">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400"><i class="fa-solid fa-magnifying-glass"></i></span>
-                    <input type="text" placeholder="Search games (e.g. Free Fire)..." class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-500">
-                </div>
-
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-sm font-bold text-slate-900 flex items-center"><i class="fa-solid fa-fire text-red-500 mr-2"></i> Popular Games</h3>
-                    <span class="text-[11px] bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full font-semibold">9 Games</span>
-                </div>
-
-                <!-- Games Grid -->
-                <div class="grid grid-cols-3 gap-3">
-                    <!-- Free Fire (Active) -->
-                    <div onclick="navigateToTopUp()" class="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden text-center p-1.5 cursor-pointer hover:border-blue-500 transition relative">
-                        <span class="absolute top-1 right-1 bg-emerald-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">ACTIVE</span>
-                        <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1.5"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150" class="w-full h-full object-cover"></div>
-                        <p class="text-[10px] font-bold text-slate-800 truncate">Free Fire (SG)</p>
-                    </div>
-                    <!-- PUBG (Not Active) -->
-                    <div class="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden text-center p-1.5 opacity-60 relative">
-                        <span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">Not Active</span>
-                        <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1.5"><img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=150" class="w-full h-full object-cover"></div>
-                        <p class="text-[10px] font-bold text-slate-800 truncate">PUBG Mobile</p>
-                    </div>
-                    <!-- Delta Force (Not Active) -->
-                    <div class="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden text-center p-1.5 opacity-60 relative">
-                        <span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">Not Active</span>
-                        <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1.5"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150" class="w-full h-full object-cover"></div>
-                        <p class="text-[10px] font-bold text-slate-800 truncate">Delta Force M</p>
-                    </div>
-                    <!-- Blood Strike (Not Active) -->
-                    <div class="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden text-center p-1.5 opacity-60 relative">
-                        <span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">Not Active</span>
-                        <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1.5"><img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=150" class="w-full h-full object-cover"></div>
-                        <p class="text-[10px] font-bold text-slate-800 truncate">Blood Strike</p>
-                    </div>
-                    <!-- Farlight84 (Not Active) -->
-                    <div class="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden text-center p-1.5 opacity-60 relative">
-                        <span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">Not Active</span>
-                        <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1.5"><img src="https://images.unsplash.com/photo-1553481187-be93c21490a9?w=150" class="w-full h-full object-cover"></div>
-                        <p class="text-[10px] font-bold text-slate-800 truncate">Farlight84</p>
-                    </div>
-                    <!-- PUBG New State (Not Active) -->
-                    <div class="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden text-center p-1.5 opacity-60 relative">
-                        <span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">Not Active</span>
-                        <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1.5"><img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=150" class="w-full h-full object-cover"></div>
-                        <p class="text-[10px] font-bold text-slate-800 truncate">PUBG New State</p>
-                    </div>
-                    <!-- Free Fire Ind (Active) -->
-                    <div onclick="navigateToTopUp()" class="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden text-center p-1.5 cursor-pointer hover:border-blue-500 transition relative">
-                        <span class="absolute top-1 right-1 bg-emerald-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">ACTIVE</span>
-                        <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1.5"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150" class="w-full h-full object-cover"></div>
-                        <p class="text-[10px] font-bold text-slate-800 truncate">Free Fire (Ind)</p>
-                    </div>
-                    <!-- Where Winds (Not Active) -->
-                    <div class="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden text-center p-1.5 opacity-60 relative">
-                        <span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">Not Active</span>
-                        <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1.5"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150" class="w-full h-full object-cover"></div>
-                        <p class="text-[10px] font-bold text-slate-800 truncate">Where Winds...</p>
-                    </div>
-                    <!-- Valorant (Not Active) -->
-                    <div class="bg-white border border-slate-100 shadow-sm rounded-xl overflow-hidden text-center p-1.5 opacity-60 relative">
-                        <span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded">Not Active</span>
-                        <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1.5"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150" class="w-full h-full object-cover"></div>
-                        <p class="text-[10px] font-bold text-slate-800 truncate">Valorant (Sin...)</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PACKAGE TOP-UP DETAILS VIEW (Screenshot_20260603-150317.jpg) -->
-            <div id="topup-details-view" class="hidden px-4 py-6 bg-slate-50">
+            <div id="view-topup-portal" class="hidden">
                 
-                <!-- 1. Player Verification Box -->
-                <div class="bg-white border border-slate-100 shadow-sm rounded-2xl p-4 mb-6">
-                    <div class="flex items-center space-x-2.5 mb-4">
-                        <span class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center">1</span>
-                        <h3 class="text-sm font-bold text-slate-800">Verify Your Player ID</h3>
-                    </div>
-                    <div class="flex space-x-2 mb-3">
-                        <input type="text" placeholder="Enter your Player ID (UID)" class="flex-1 px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none">
-                        <button class="bg-slate-100 text-slate-600 font-semibold text-xs px-4 rounded-xl flex items-center space-x-1"><i class="fa-regular fa-clipboard"></i> <span>Paste</span></button>
-                    </div>
-                    <button class="w-full bg-blue-600 text-white text-xs font-bold py-3 rounded-xl shadow-sm"><i class="fa-regular fa-circle-check mr-1.5"></i> Verify</button>
-                </div>
-
-                <!-- 2. Package Catalog Wrapper -->
-                <div class="bg-white border border-slate-100 shadow-sm rounded-2xl p-4">
-                    <div class="flex items-center space-x-2.5 mb-4">
-                        <span class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center">2</span>
-                        <h3 class="text-sm font-bold text-slate-800">Select Diamond Packages</h3>
+                <section class="px-4 py-6 bg-white border-b border-slate-100">
+                    <div class="text-center mb-5">
+                        <h2 class="text-xl font-black text-slate-900">Game Top-up Center</h2>
+                        <p class="text-slate-400 text-xs">Select your game to view available packages</p>
                     </div>
 
-                    <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
-                        <span class="text-[11px] text-slate-400">Tap + to add items</span>
-                        <div class="flex space-x-1 bg-slate-100 p-0.5 rounded-lg text-[10px] font-bold">
-                            <span class="bg-white text-blue-600 px-3 py-1 rounded-md shadow-xs">LKR (Rs)</span>
-                            <span class="text-slate-500 px-3 py-1">USDT</span>
-                        </div>
+                    <div class="relative mb-5">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" placeholder="Search operational games..." class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none">
                     </div>
 
-                    <!-- Packages Catalog Grid (Screenshot_20260603-150317.jpg to Screenshot_20260603-150342.jpg) -->
-                    <div class="grid grid-cols-2 gap-3">
-                        <!-- Pack 1 -->
-                        <div class="bg-white border border-slate-100 shadow-xs rounded-xl p-3 text-center relative flex flex-col justify-between items-center">
-                            <span class="absolute top-1.5 right-1.5 bg-red-500 text-white font-black text-[9px] px-1.5 py-0.5 rounded-full">8% OFF</span>
-                            <div class="w-14 h-14 bg-blue-50/50 rounded-lg flex items-center justify-center mb-2 mt-2"><i class="fa-solid fa-box-open text-blue-500 text-2xl"></i></div>
-                            <h4 class="text-[11px] font-bold text-slate-800 line-clamp-1">Weekly Lite Membership</h4>
-                            <p class="text-[10px] text-slate-400 line-through mt-0.5">Rs. 130.00</p>
-                            <p class="text-xs font-black text-emerald-500">Rs. 120.00</p>
-                            <div class="flex items-center space-x-3 mt-3 bg-slate-50 p-1 rounded-lg border border-slate-100">
-                                <button onclick="changeQty('pack1', -1, 120.00)" class="w-6 h-6 bg-white text-slate-600 font-bold rounded shadow-xs text-xs">-</button>
-                                <span id="qty-pack1" class="text-xs font-bold text-slate-800">0</span>
-                                <button onclick="changeQty('pack1', 1, 120.00)" class="w-6 h-6 bg-blue-600 text-white font-bold rounded shadow-xs text-xs">+</button>
-                            </div>
+                    <div class="grid grid-cols-3 gap-2.5">
+                        <div class="border-2 border-blue-500 bg-blue-50/20 rounded-xl p-1.5 text-center relative cursor-pointer">
+                            <span class="absolute top-1 right-1 bg-emerald-500 text-white text-[7px] font-bold px-1 rounded">ACTIVE</span>
+                            <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=120" class="w-full h-full object-cover"></div>
+                            <p class="text-[10px] font-bold text-slate-800 truncate">Free Fire (SG)</p>
                         </div>
-
-                        <!-- Pack 2 -->
-                        <div class="bg-white border border-slate-100 shadow-xs rounded-xl p-3 text-center relative flex flex-col justify-between items-center">
-                            <span class="absolute top-1.5 right-1.5 bg-red-500 text-white font-black text-[9px] px-1.5 py-0.5 rounded-full">5% OFF</span>
-                            <div class="w-14 h-14 bg-blue-50/50 rounded-lg flex items-center justify-center mb-2 mt-2"><i class="fa-solid fa-box-open text-cyan-500 text-2xl"></i></div>
-                            <h4 class="text-[11px] font-bold text-slate-800 line-clamp-1">Weekly Membership</h4>
-                            <p class="text-[10px] text-slate-400 line-through mt-0.5">Rs. 580.00</p>
-                            <p class="text-xs font-black text-emerald-500">Rs. 550.00</p>
-                            <div class="flex items-center space-x-3 mt-3 bg-slate-50 p-1 rounded-lg border border-slate-100">
-                                <button onclick="changeQty('pack2', -1, 550.00)" class="w-6 h-6 bg-white text-slate-600 font-bold rounded shadow-xs text-xs">-</button>
-                                <span id="qty-pack2" class="text-xs font-bold text-slate-800">0</span>
-                                <button onclick="changeQty('pack2', 1, 550.00)" class="w-6 h-6 bg-blue-600 text-white font-bold rounded shadow-xs text-xs">+</button>
-                            </div>
+                        <div class="border border-slate-100 rounded-xl p-1.5 text-center relative opacity-50 cursor-not-allowed">
+                            <span class="absolute top-1 right-1 bg-red-500 text-white text-[7px] font-bold px-1 rounded">Not Active</span>
+                            <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1"><img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=120" class="w-full h-full object-cover"></div>
+                            <p class="text-[10px] font-bold text-slate-700 truncate">PUBG Mobile</p>
                         </div>
-
-                        <!-- Pack 3 -->
-                        <div class="bg-white border border-slate-100 shadow-xs rounded-xl p-3 text-center relative flex flex-col justify-between items-center">
-                            <span class="absolute top-1.5 right-1.5 bg-red-500 text-white font-black text-[9px] px-1.5 py-0.5 rounded-full">4% OFF</span>
-                            <div class="w-14 h-14 bg-blue-50/50 rounded-lg flex items-center justify-center mb-2 mt-2"><i class="fa-solid fa-boxes-stacked text-indigo-500 text-2xl"></i></div>
-                            <h4 class="text-[11px] font-bold text-slate-800 line-clamp-1">Monthly Membership</h4>
-                            <p class="text-[10px] text-slate-400 line-through mt-0.5">Rs. 2850.00</p>
-                            <p class="text-xs font-black text-emerald-500">Rs. 2750.00</p>
-                            <div class="flex items-center space-x-3 mt-3 bg-slate-50 p-1 rounded-lg border border-slate-100">
-                                <button onclick="changeQty('pack3', -1, 2750.00)" class="w-6 h-6 bg-white text-slate-600 font-bold rounded shadow-xs text-xs">-</button>
-                                <span id="qty-pack3" class="text-xs font-bold text-slate-800">0</span>
-                                <button onclick="changeQty('pack3', 1, 2750.00)" class="w-6 h-6 bg-blue-600 text-white font-bold rounded shadow-xs text-xs">+</button>
-                            </div>
+                        <div class="border border-slate-100 rounded-xl p-1.5 text-center relative opacity-50 cursor-not-allowed">
+                            <span class="absolute top-1 right-1 bg-red-500 text-white text-[7px] font-bold px-1 rounded">Not Active</span>
+                            <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=120" class="w-full h-full object-cover"></div>
+                            <p class="text-[10px] font-bold text-slate-700 truncate">Delta Force M</p>
                         </div>
-
-                        <!-- Pack 4 -->
-                        <div class="bg-white border border-slate-100 shadow-xs rounded-xl p-3 text-center relative flex flex-col justify-between items-center">
-                            <span class="absolute top-1.5 right-1.5 bg-red-500 text-white font-black text-[9px] px-1.5 py-0.5 rounded-full">4% OFF</span>
-                            <div class="w-14 h-14 bg-blue-50/50 rounded-lg flex items-center justify-center mb-2 mt-2"><i class="fa-solid fa-crown text-amber-500 text-2xl"></i></div>
-                            <h4 class="text-[11px] font-bold text-slate-800 line-clamp-1">VIP Membership</h4>
-                            <p class="text-[10px] text-slate-400 line-through mt-0.5">Rs. 3430.00</p>
-                            <p class="text-xs font-black text-emerald-500">Rs. 3300.00</p>
-                            <div class="flex items-center space-x-3 mt-3 bg-slate-50 p-1 rounded-lg border border-slate-100">
-                                <button onclick="changeQty('pack4', -1, 3300.00)" class="w-6 h-6 bg-white text-slate-600 font-bold rounded shadow-xs text-xs">-</button>
-                                <span id="qty-pack4" class="text-xs font-bold text-slate-800">0</span>
-                                <button onclick="changeQty('pack4', 1, 3300.00)" class="w-6 h-6 bg-blue-600 text-white font-bold rounded shadow-xs text-xs">+</button>
-                            </div>
+                        <div class="border border-slate-100 rounded-xl p-1.5 text-center relative opacity-50 cursor-not-allowed">
+                            <span class="absolute top-1 right-1 bg-red-500 text-white text-[7px] font-bold px-1 rounded">Not Active</span>
+                            <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1"><img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=120" class="w-full h-full object-cover"></div>
+                            <p class="text-[10px] font-bold text-slate-700 truncate">Blood Strike</p>
                         </div>
-
-                        <!-- Pack 5 -->
-                        <div class="bg-white border border-slate-100 shadow-xs rounded-xl p-3 text-center relative flex flex-col justify-between items-center">
-                            <span class="absolute top-1.5 right-1.5 bg-red-500 text-white font-black text-[9px] px-1.5 py-0.5 rounded-full">8% OFF</span>
-                            <div class="w-14 h-14 bg-blue-50/50 rounded-lg flex items-center justify-center mb-2 mt-2"><i class="fa-solid fa-gem text-blue-500 text-2xl"></i></div>
-                            <h4 class="text-[11px] font-bold text-slate-800 line-clamp-1">25 Diamonds</h4>
-                            <p class="text-[10px] text-slate-400 line-through mt-0.5">Rs. 90.00</p>
-                            <p class="text-xs font-black text-emerald-500">Rs. 85.00</p>
-                            <div class="flex items-center space-x-3 mt-3 bg-slate-50 p-1 rounded-lg border border-slate-100">
-                                <button onclick="changeQty('pack5', -1, 85.00)" class="w-6 h-6 bg-white text-slate-600 font-bold rounded shadow-xs text-xs">-</button>
-                                <span id="qty-pack5" class="text-xs font-bold text-slate-800">0</span>
-                                <button onclick="changeQty('pack5', 1, 85.00)" class="w-6 h-6 bg-blue-600 text-white font-bold rounded shadow-xs text-xs">+</button>
-                            </div>
+                        <div class="border border-slate-100 rounded-xl p-1.5 text-center relative opacity-50 cursor-not-allowed">
+                            <span class="absolute top-1 right-1 bg-red-500 text-white text-[7px] font-bold px-1 rounded">Not Active</span>
+                            <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1"><img src="https://images.unsplash.com/photo-1553481187-be93c21490a9?w=120" class="w-full h-full object-cover"></div>
+                            <p class="text-[10px] font-bold text-slate-700 truncate">Farlight84</p>
                         </div>
+                        <div class="border border-slate-200 rounded-xl p-1.5 text-center relative cursor-pointer">
+                            <span class="absolute top-1 right-1 bg-emerald-500 text-white text-[7px] font-bold px-1 rounded">ACTIVE</span>
+                            <div class="w-full aspect-square bg-slate-100 rounded-lg overflow-hidden mb-1"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=120" class="w-full h-full object-cover"></div>
+                            <p class="text-[10px] font-bold text-slate-800 truncate">Free Fire (Ind)</p>
+                        </div>
+                    </div>
+                </section>
 
-                        <!-- Pack 6 -->
-                        <div class="bg-white border border-slate-100 shadow-xs rounded-xl p-3 text-center relative flex flex-col justify-between items-center">
-                            <span class="absolute top-1.5 right-1.5 bg-red-500 text-white font-black text-[9px] px-1.5 py-0.5 rounded-full">6% OFF</span>
-                            <div class="w-14 h-14 bg-blue-50/50 rounded-lg flex items-center justify-center mb-2 mt-2"><i class="fa-solid fa-gem text-cyan-500 text-2xl"></i></div>
-                            <h4 class="text-[11px] font-bold text-slate-800 line-clamp-1">100 Diamonds</h4>
-                            <p class="text-[10px] text-slate-400 line-through mt-0.5">Rs. 330.00</p>
-                            <p class="text-xs font-black text-emerald-500">Rs. 310.00</p>
-                            <div class="flex items-center space-x-3 mt-3 bg-slate-50 p-1 rounded-lg border border-slate-100">
-                                <button onclick="changeQty('pack6', -1, 310.00)" class="w-6 h-6 bg-white text-slate-600 font-bold rounded shadow-xs text-xs">-</button>
-                                <span id="qty-pack6" class="text-xs font-bold text-slate-800">0</span>
-                                <button onclick="changeQty('pack6', 1, 310.00)" class="w-6 h-6 bg-blue-600 text-white font-bold rounded shadow-xs text-xs">+</button>
-                            </div>
+                <div class="px-4 py-6 bg-slate-50">
+                    
+                    <div class="bg-white border border-slate-100 shadow-sm rounded-2xl p-4 mb-5">
+                        <div class="flex items-center space-x-2 mb-3.5">
+                            <span class="w-5.5 h-5.5 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center">1</span>
+                            <h3 class="text-xs font-bold text-slate-800">Verify Player ID Credentials</h3>
+                        </div>
+                        <div class="flex space-x-2">
+                            <input type="text" placeholder="Enter Game UID Number" class="flex-1 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-500">
+                            <button class="bg-slate-100 text-slate-600 font-medium text-xs px-3.5 rounded-xl">Verify</button>
                         </div>
                     </div>
 
-                    <!-- Payment Gateways Footer Icons (Screenshot_20260603-150342.jpg) -->
-                    <div class="mt-8 border-t border-slate-100 pt-6 text-center">
-                        <span class="inline-flex items-center bg-emerald-50 text-emerald-600 text-[11px] font-bold px-4 py-1.5 rounded-full mb-3">
-                            <i class="fa-solid fa-shield-halved mr-1.5"></i> 100% Secure Payments
-                        </span>
-                        <p class="text-slate-400 text-[11px] mb-3">We accept a wide range of secure payment methods:</p>
-                        <div class="flex justify-center space-x-2 text-xl text-slate-400">
-                            <span class="px-2 py-1 border border-slate-200 rounded-md bg-white"><i class="fa-brands fa-cc-visa text-blue-600"></i></span>
-                            <span class="px-2 py-1 border border-slate-200 rounded-md bg-white"><i class="fa-brands fa-cc-mastercard text-red-500"></i></span>
-                            <span class="px-2 py-1 border border-slate-200 rounded-md bg-white"><i class="fa-brands fa-cc-amex text-cyan-500"></i></span>
+                    <div class="bg-white border border-slate-100 shadow-sm rounded-2xl p-4">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="w-5.5 h-5.5 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center">2</span>
+                            <h3 class="text-xs font-bold text-slate-800">Select Desired Package Offerings</h3>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            
+                            <div id="card-p1" class="package-card bg-white border border-slate-200 rounded-xl p-3 text-center flex flex-col justify-between items-center relative transition">
+                                <span class="absolute top-1.5 right-1.5 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">8% OFF</span>
+                                <div class="w-12 h-12 bg-blue-50 text-blue-500 rounded-lg flex items-center justify-center my-1 text-xl"><i class="fa-solid fa-box-open"></i></div>
+                                <h4 class="text-[11px] font-bold text-slate-800 mt-1 line-clamp-1">Weekly Lite Membership</h4>
+                                <p class="text-[10px] font-black text-emerald-500 mt-1">Rs. 120.00</p>
+                                <div class="flex items-center space-x-2 mt-3 bg-slate-100 p-1 rounded-md">
+                                    <button onclick="updateCart('p1', -1, 120.00)" class="w-5 h-5 bg-white text-slate-700 font-bold rounded text-xs shadow-xs">-</button>
+                                    <span id="display-qty-p1" class="text-xs font-bold text-slate-800 w-4">0</span>
+                                    <button onclick="updateCart('p1', 1, 120.00)" class="w-5 h-5 bg-blue-600 text-white font-bold rounded text-xs shadow-xs">+</button>
+                                </div>
+                            </div>
+
+                            <div id="card-p2" class="package-card bg-white border border-slate-200 rounded-xl p-3 text-center flex flex-col justify-between items-center relative transition">
+                                <span class="absolute top-1.5 right-1.5 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">5% OFF</span>
+                                <div class="w-12 h-12 bg-blue-50 text-cyan-500 rounded-lg flex items-center justify-center my-1 text-xl"><i class="fa-solid fa-box-open"></i></div>
+                                <h4 class="text-[11px] font-bold text-slate-800 mt-1 line-clamp-1">Weekly Membership</h4>
+                                <p class="text-[10px] font-black text-emerald-500 mt-1">Rs. 550.00</p>
+                                <div class="flex items-center space-x-2 mt-3 bg-slate-100 p-1 rounded-md">
+                                    <button onclick="updateCart('p2', -1, 550.00)" class="w-5 h-5 bg-white text-slate-700 font-bold rounded text-xs shadow-xs">-</button>
+                                    <span id="display-qty-p2" class="text-xs font-bold text-slate-800 w-4">0</span>
+                                    <button onclick="updateCart('p2', 1, 550.00)" class="w-5 h-5 bg-blue-600 text-white font-bold rounded text-xs shadow-xs">+</button>
+                                </div>
+                            </div>
+
+                            <div id="card-p3" class="package-card bg-white border border-slate-200 rounded-xl p-3 text-center flex flex-col justify-between items-center relative transition">
+                                <span class="absolute top-1.5 right-1.5 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">4% OFF</span>
+                                <div class="w-12 h-12 bg-blue-50 text-indigo-500 rounded-lg flex items-center justify-center my-1 text-xl"><i class="fa-solid fa-boxes-stacked"></i></div>
+                                <h4 class="text-[11px] font-bold text-slate-800 mt-1 line-clamp-1">Monthly Membership</h4>
+                                <p class="text-[10px] font-black text-emerald-500 mt-1">Rs. 2,750.00</p>
+                                <div class="flex items-center space-x-2 mt-3 bg-slate-100 p-1 rounded-md">
+                                    <button onclick="updateCart('p3', -1, 2750.00)" class="w-5 h-5 bg-white text-slate-700 font-bold rounded text-xs shadow-xs">-</button>
+                                    <span id="display-qty-p3" class="text-xs font-bold text-slate-800 w-4">0</span>
+                                    <button onclick="updateCart('p3', 1, 2750.00)" class="w-5 h-5 bg-blue-600 text-white font-bold rounded text-xs shadow-xs">+</button>
+                                </div>
+                            </div>
+
+                            <div id="card-p4" class="package-card bg-white border border-slate-200 rounded-xl p-3 text-center flex flex-col justify-between items-center relative transition">
+                                <div class="w-12 h-12 bg-blue-50 text-amber-500 rounded-lg flex items-center justify-center my-1 text-xl"><i class="fa-solid fa-crown"></i></div>
+                                <h4 class="text-[11px] font-bold text-slate-800 mt-1 line-clamp-1">VIP Membership</h4>
+                                <p class="text-[10px] font-black text-emerald-500 mt-1">Rs. 3,300.00</p>
+                                <div class="flex items-center space-x-2 mt-3 bg-slate-100 p-1 rounded-md">
+                                    <button onclick="updateCart('p4', -1, 3300.00)" class="w-5 h-5 bg-white text-slate-700 font-bold rounded text-xs shadow-xs">-</button>
+                                    <span id="display-qty-p4" class="text-xs font-bold text-slate-800 w-4">0</span>
+                                    <button onclick="updateCart('p4', 1, 3300.00)" class="w-5 h-5 bg-blue-600 text-white font-bold rounded text-xs shadow-xs">+</button>
+                                </div>
+                            </div>
+
+                            <div id="card-p5" class="package-card bg-white border border-slate-200 rounded-xl p-3 text-center flex flex-col justify-between items-center relative transition">
+                                <div class="w-12 h-12 bg-blue-50 text-blue-500 rounded-lg flex items-center justify-center my-1 text-xl"><i class="fa-solid fa-gem"></i></div>
+                                <h4 class="text-[11px] font-bold text-slate-800 mt-1 line-clamp-1">25 Diamonds</h4>
+                                <p class="text-[10px] font-black text-emerald-500 mt-1">Rs. 85.00</p>
+                                <div class="flex items-center space-x-2 mt-3 bg-slate-100 p-1 rounded-md">
+                                    <button onclick="updateCart('p5', -1, 85.00)" class="w-5 h-5 bg-white text-slate-700 font-bold rounded text-xs shadow-xs">-</button>
+                                    <span id="display-qty-p5" class="text-xs font-bold text-slate-800 w-4">0</span>
+                                    <button onclick="updateCart('p5', 1, 85.00)" class="w-5 h-5 bg-blue-600 text-white font-bold rounded text-xs shadow-xs">+</button>
+                                </div>
+                            </div>
+
+                            <div id="card-p6" class="package-card bg-white border border-slate-200 rounded-xl p-3 text-center flex flex-col justify-between items-center relative transition">
+                                <div class="w-12 h-12 bg-blue-50 text-blue-500 rounded-lg flex items-center justify-center my-1 text-xl"><i class="fa-solid fa-gem"></i></div>
+                                <h4 class="text-[11px] font-bold text-slate-800 mt-1 line-clamp-1">100 Diamonds</h4>
+                                <p class="text-[10px] font-black text-emerald-500 mt-1">Rs. 310.00</p>
+                                <div class="flex items-center space-x-2 mt-3 bg-slate-100 p-1 rounded-md">
+                                    <button onclick="updateCart('p6', -1, 310.00)" class="w-5 h-5 bg-white text-slate-700 font-bold rounded text-xs shadow-xs">-</button>
+                                    <span id="display-qty-p6" class="text-xs font-bold text-slate-800 w-4">0</span>
+                                    <button onclick="updateCart('p6', 1, 310.00)" class="w-5 h-5 bg-blue-600 text-white font-bold rounded text-xs shadow-xs">+</button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
             </div>
+
         </div>
 
-        <!-- STICKY CALCULATION FOOTER BAR -->
-        <div id="sticky-total-bar" class="hidden absolute bottom-0 inset-x-0 bg-white border-t border-slate-200 p-4 shadow-xl flex items-center justify-between z-50">
+        <div id="checkout-footer-bar" class="hidden absolute bottom-0 inset-x-0 bg-white border-t border-slate-200 p-4 shadow-2xl flex items-center justify-between z-50">
             <div>
                 <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Total Price</span>
-                <span id="calculated-total-display" class="text-lg font-black text-slate-900">Rs. 0.00</span>
+                <span id="total-price-indicator" class="text-lg font-black text-slate-900">Rs. 0.00</span>
             </div>
             <button class="gradient-btn text-white text-xs font-bold px-6 py-3 rounded-xl shadow-md">
-                Proceed to Pay <i class="fa-solid fa-arrow-right ml-1"></i>
+                Proceed to Buy <i class="fa-solid fa-arrow-right ml-1"></i>
             </button>
         </div>
 
+        <footer class="bg-white border-t border-slate-100 py-6 text-center text-[10px] text-slate-400">
+            &copy; 2026 MIKAZO TOP UP. Powered securely.
+        </footer>
+
     </div>
 
-    <!-- Live Routing & Auto-Calculation Engine Controls -->
     <script>
-        let globalQuantities = {};
-        let globalTotalAmount = 0.00;
+        // Track cart details internally
+        let shoppingCartData = { p1: 0, p2: 0, p3: 0, p4: 0, p5: 0, p6: 0 };
+        
+        const priceReferenceMap = {
+            p1: 120.00,
+            p2: 550.00,
+            p3: 2750.00,
+            p4: 3300.00,
+            p5: 85.00,
+            p6: 310.00
+        };
 
-        function navigateToTopUp() {
-            document.getElementById('main-landing-view').classList.add('hidden');
-            document.getElementById('topup-details-view').classList.remove('hidden');
-            document.getElementById('sticky-total-bar').classList.remove('hidden');
-            document.getElementById('game-center').scrollIntoView({ behavior: 'smooth' });
+        function showLandingPage() {
+            document.getElementById('view-topup-portal').classList.add('hidden');
+            document.getElementById('checkout-footer-bar').classList.add('hidden');
+            document.getElementById('view-landing-page').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function changeQty(packId, amount, itemPrice) {
-            if (!globalQuantities[packId]) globalQuantities[packId] = 0;
-            
-            globalQuantities[packId] += amount;
-            if (globalQuantities[packId] < 0) globalQuantities[packId] = 0;
-
-            document.getElementById('qty-' + packId).innerText = globalQuantities[packId];
-            recalculateTotal();
+        function switchToTopUpView() {
+            document.getElementById('view-landing-page').classList.add('hidden');
+            document.getElementById('view-topup-portal').classList.remove('hidden');
+            document.getElementById('checkout-footer-bar').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function recalculateTotal() {
-            let runningTotal = 0;
+        function updateCart(packId, delta) {
+            let currentQuantity = shoppingCartData[packId] + delta;
+            if (currentQuantity < 0) currentQuantity = 0;
             
-            // Item Rates Matcher
-            const pricingMatrix = {
-                'pack1': 120.00,
-                'pack2': 550.00,
-                'pack3': 2750.00,
-                'pack4': 3300.00,
-                'pack5': 85.00,
-                'pack6': 310.00
-            };
-
-            for (let id in globalQuantities) {
-                if (pricingMatrix[id]) {
-                    runningTotal += globalQuantities[id] * pricingMatrix[id];
-                }
+            shoppingCartData[packId] = currentQuantity;
+            
+            // UI Item Quantity Update
+            document.getElementById('display-qty-' + packId).innerText = currentQuantity;
+            
+            // Visual Selected State Toggler
+            const elementCard = document.getElementById('card-' + packId);
+            if (currentQuantity > 0) {
+                elementCard.classList.add('selected');
+            } else {
+                elementCard.classList.remove('selected');
             }
+            
+            calculateBill();
+        }
 
-            document.getElementById('calculated-total-display').innerText = 'Rs. ' + runningTotal.toFixed(2);
+        function calculateBill() {
+            let calculatedSum = 0.00;
+            
+            for (let productKey in shoppingCartData) {
+                calculatedSum += shoppingCartData[productKey] * priceReferenceMap[productKey];
+            }
+            
+            // Update total price indicator
+            document.getElementById('total-price-indicator').innerText = 'Rs. ' + calculatedSum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
     </script>
 
