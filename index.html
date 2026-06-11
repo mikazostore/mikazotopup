@@ -3,295 +3,625 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIKAZO TOP UP - Sri Lanka's #1 Game Top-Up Platform</title>
-    <!-- Tailwind CSS for modern, pixel-perfect layout styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for clean user interface icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts for typography matching the screenshots -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>WORLD OF FOOTBALL - FIFA World Cup Highlights</title>
     <style>
+        :root {
+            --primary-color: #8a1538; /* Classic World Cup Maroon */
+            --accent-color: #dfac12; /* Gold */
+            --dark-bg: #0d0d11;
+            --card-bg: #16161f;
+            --text-color: #ffffff;
+            --text-muted: #a0a0a5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
-        .hero-bg {
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200');
-            background-size: cover;
-            background-position: center;
+
+        /* Welcome Overlay Barrier to bypass Browser Autoplay Restrictions */
+        #welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0d0d11 20%, #8a1538 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 0.6s ease;
         }
-        .gradient-text {
-            background: linear-gradient(to right, #3b82f6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        #welcome-overlay h1 {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.7);
         }
-        .gradient-btn {
-            background: linear-gradient(90deg, #2563eb, #06b6d4);
+
+        #welcome-overlay p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-muted);
         }
-        .gradient-btn:hover {
-            background: linear-gradient(90deg, #1d4ed8, #0891b2);
+
+        .enter-btn {
+            background-color: var(--accent-color);
+            color: #000;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(223, 172, 18, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.05);
+            background-color: #fff;
+        }
+
+        /* Header Navigation */
+        header {
+            background-color: rgba(22, 22, 31, 0.95);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--text-color);
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero & Countdown Timer Container */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(13,13,17,1)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1500&q=80') center/cover;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .countdown-container {
+            background-color: rgba(22, 22, 31, 0.85);
+            border: 2px solid var(--primary-color);
+            max-width: 650px;
+            margin: 40px auto 0 auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .countdown-container h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .time-box {
+            background-color: var(--primary-color);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 90px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .time-box .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* Main Layout Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        section {
+            margin-bottom: 70px;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Highlights Grid Section */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .video-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #222;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .card-info {
+            padding: 20px;
+        }
+
+        .card-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        .card-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Schedule Match Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        th, td {
+            padding: 18px 20px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        tr {
+            border-bottom: 1px solid #222;
+            transition: background-color 0.2s;
+        }
+
+        tr:hover {
+            background-color: rgba(138, 21, 56, 0.1);
+        }
+
+        .badge {
+            background-color: #282835;
+            color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .vs-teams {
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+
+        /* Global Sticky Audio Controller Widget UI */
+        .audio-player-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            z-index: 1000;
+        }
+
+        .widget-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .widget-info h5 {
+            font-size: 0.95rem;
+            color: var(--accent-color);
+            white-space: nowrap;
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .widget-controls button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .widget-controls button:hover {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #060608;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid #1c1c24;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+
+        footer p span {
+            color: var(--accent-color);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body>
 
-    <!-- HEADER (As seen in Screenshot_20260602-182922.jpg) -->
-    <header class="sticky top-0 z-50 bg-white shadow-sm border-b border-slate-100 px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-            <div class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white font-black text-xl tracking-tighter">M</div>
-            <div>
-                <span class="font-extrabold text-xl tracking-tight text-slate-900 block leading-none">MIKAZO</span>
-                <span class="text-[10px] tracking-widest text-slate-500 font-bold">MIKAZOTOPUP.COM</span>
-            </div>
-        </div>
-        <button class="text-slate-700 hover:text-slate-900 text-2xl focus:outline-none">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+    <div id="welcome-overlay">
+        <h1>World of Football</h1>
+        <p>Experience FIFA World Cup Match Centers & Anthem Anthems</p>
+        <button class="enter-btn" onclick="initializeStadium()">Enter Stadium</button>
+    </div>
+
+    <div id="audio-pipeline" style="display: none;"></div>
+
+    <header>
+        <div class="logo">World of <span>Football</span></div>
+        <nav>
+            <a href="#countdown">Match Center</a>
+            <a href="#highlights">Highlights</a>
+            <a href="#fixtures">Fixtures</a>
+        </nav>
     </header>
 
-    <!-- HERO SECTION (As seen in Screenshot_20260602-182922.jpg) -->
-    <section class="hero-bg text-white text-center px-6 py-20 relative overflow-hidden">
-        <!-- Floating Diamond Effects -->
-        <div class="absolute top-10 right-8 opacity-20 text-cyan-400 text-6xl animate-bounce"><i class="fa-solid fa-gem"></i></div>
-        <div class="absolute bottom-12 left-6 opacity-15 text-blue-400 text-4xl"><i class="fa-solid fa-gem"></i></div>
+    <div class="hero" id="countdown">
+        <h2>FIFA World Cup Arena Hub</h2>
+        <p>Your premium sanctuary for all matches, rosters, timings, and legacy visual reels.</p>
         
-        <div class="max-w-md mx-auto">
-            <span class="inline-flex items-center bg-blue-950/60 border border-blue-500/30 text-blue-400 text-xs font-semibold tracking-wider px-4 py-1.5 rounded-full mb-6 uppercase">
-                <span class="w-2 h-2 rounded-full bg-blue-500 mr-2 animate-pulse"></span> Sri Lanka's #1 Game Top-Up Platform
-            </span>
-            <h1 class="text-5xl font-black tracking-tight mb-4 text-white">
-                MIKAZO <br><span class="text-cyan-400">TOPUP</span>
-            </h1>
-            <p class="text-slate-300 text-sm leading-relaxed mb-8 font-light">
-                Premium game top-ups at <strong class="text-white font-semibold">unbeatable prices</strong> — instant delivery, trusted by thousands of Sri Lankan gamers.
-            </p>
-            <div class="flex flex-col space-y-3">
-                <a href="#services" class="gradient-btn text-white font-semibold text-sm py-3.5 rounded-xl shadow-lg shadow-cyan-500/20 flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-layer-group"></i> <span>EXPLORE SERVICES</span>
-                </a>
-                <a href="#services" class="bg-transparent border-2 border-slate-700 hover:border-slate-500 text-white font-semibold text-sm py-3.5 rounded-xl flex items-center justify-center space-x-2 transition">
-                    <i class="fa-solid fa-bolt text-yellow-400"></i> <span>TOP UP NOW</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- OUR PREMIUM SERVICES (As seen in Screenshot_20260602-182940.png & Screenshot_20260602-182948.png) -->
-    <section id="services" class="px-5 py-14 max-w-md mx-auto">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-slate-900">Our Premium <span class="text-blue-600">Services</span></h2>
-            <p class="text-slate-500 text-sm mt-2">Elevate your gaming experience with our top-tier digital services</p>
-        </div>
-
-        <div class="space-y-6">
-            <!-- Card 1: Game TopUp -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm text-center flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden bg-slate-100 mb-4 border-4 border-slate-50 flex items-center justify-center">
-                    <i class="fa-solid fa-gamepad text-4xl text-blue-500"></i>
+        <div class="countdown-container">
+            <h3>Opening Match Kickoff Countdown</h3>
+            <div class="timer">
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <div class="label">Days</div>
                 </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-2">Game TopUp</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-5">Instant in-game currency delivered to your account at unbeatable prices</p>
-                <button class="gradient-btn text-white text-sm font-bold px-6 py-3 rounded-xl flex items-center space-x-2 shadow-md shadow-blue-500/10">
-                    <span>SHOP NOW</span> <i class="fa-solid fa-arrow-right text-xs"></i>
-                </button>
-            </div>
-
-            <!-- Card 2: Cards -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm text-center flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden bg-slate-100 mb-4 border-4 border-slate-50 flex items-center justify-center">
-                    <i class="fa-solid fa-credit-card text-4xl text-cyan-500"></i>
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <div class="label">Hours</div>
                 </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-2">Cards</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-5">Garena Shells, Bot Recharge Codes & premium gift cards for gamers</p>
-                <button class="gradient-btn text-white text-sm font-bold px-6 py-3 rounded-xl flex items-center space-x-2 shadow-md shadow-blue-500/10">
-                    <span>SHOP NOW</span> <i class="fa-solid fa-arrow-right text-xs"></i>
-                </button>
-            </div>
-
-            <!-- Card 3: Post Designs -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm text-center flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden bg-slate-100 mb-4 border-4 border-slate-50 flex items-center justify-center">
-                    <i class="fa-solid fa-palette text-4xl text-indigo-500"></i>
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <div class="label">Mins</div>
                 </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-2">Post Designs</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-5">Custom posts & logos crafted for your gaming brand identity</p>
-                <button class="gradient-btn text-white text-sm font-bold px-6 py-3 rounded-xl flex items-center space-x-2 shadow-md shadow-blue-500/10">
-                    <span>CREATE NOW</span> <i class="fa-solid fa-arrow-right text-xs"></i>
-                </button>
-            </div>
-
-            <!-- Card 4: Other Services -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm text-center flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 mb-4 shadow-inner flex items-center justify-center text-white text-3xl">
-                    <i class="fa-solid fa-ellipsis"></i>
-                </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-2">Other Services</h3>
-                <p class="text-slate-500 text-sm leading-relaxed mb-5">Explore our growing catalog of free & premium digital services</p>
-                <button class="gradient-btn text-white text-sm font-bold px-6 py-3 rounded-xl flex items-center space-x-2 shadow-md shadow-blue-500/10">
-                    <span>VIEW MORE</span> <i class="fa-solid fa-arrow-right text-xs"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- LIVE METRICS COUNTERS (As seen in Screenshot_20260602-182956.png) -->
-    <section class="px-5 py-6 bg-slate-100 max-w-md mx-auto">
-        <div class="grid grid-cols-2 gap-4">
-            <div class="bg-white rounded-2xl p-5 border border-slate-100 text-center shadow-sm">
-                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-500 mx-auto mb-2 flex items-center justify-center text-lg"><i class="fa-regular fa-face-smile"></i></div>
-                <span class="block text-2xl font-black text-blue-600">5,000+</span>
-                <span class="text-xs text-slate-500 font-medium">Happy Customers</span>
-            </div>
-            <div class="bg-white rounded-2xl p-5 border border-slate-100 text-center shadow-sm">
-                <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-500 mx-auto mb-2 flex items-center justify-center text-lg"><i class="fa-regular fa-circle-check"></i></div>
-                <span class="block text-2xl font-black text-cyan-500">99%</span>
-                <span class="text-xs text-slate-500 font-medium">Success Rate</span>
-            </div>
-            <div class="bg-white rounded-2xl p-5 border border-slate-100 text-center shadow-sm">
-                <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-500 mx-auto mb-2 flex items-center justify-center text-lg"><i class="fa-solid fa-bolt"></i></div>
-                <span class="block text-2xl font-black text-sky-600">200+</span>
-                <span class="text-xs text-slate-500 font-medium">Daily Avg TopUp</span>
-            </div>
-            <div class="bg-white rounded-2xl p-5 border border-slate-100 text-center shadow-sm">
-                <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-500 mx-auto mb-2 flex items-center justify-center text-lg"><i class="fa-regular fa-clock"></i></div>
-                <span class="block text-2xl font-black text-indigo-600">2s</span>
-                <span class="text-xs text-slate-500 font-medium">Delivery (Seconds)</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIALS SECTION (As seen in Screenshot_20260602-182956.png & Screenshot_20260602-183002.png) -->
-    <section class="px-5 py-14 max-w-md mx-auto bg-white border-y border-slate-100">
-        <div class="text-center mb-8">
-            <span class="text-xs font-bold text-blue-600 tracking-widest uppercase">— COMMUNITY —</span>
-            <h2 class="text-3xl font-extrabold text-slate-900 mt-1">What Our <span class="text-blue-600">Customers Say</span></h2>
-            <p class="text-slate-500 text-sm mt-2">Real reviews from our gaming community worldwide</p>
-        </div>
-
-        <!-- Horizontal scroll view replicated dynamically into a beautiful card -->
-        <div class="bg-slate-50 rounded-3xl p-6 border border-slate-100 shadow-sm relative">
-            <div class="absolute top-4 right-6 text-slate-200 text-5xl font-serif">“</div>
-            <div class="flex items-center space-x-3 mb-4">
-                <div class="w-12 h-12 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-white font-bold text-xs">YD</div>
-                <div>
-                    <h4 class="font-bold text-sm text-slate-900">YDTECH2008</h4>
-                    <span class="text-xs text-slate-500 flex items-center"><span class="mr-1">🇱🇰</span> Colombo, Sri Lanka</span>
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <div class="label">Secs</div>
                 </div>
             </div>
-            <div class="flex space-x-1 text-amber-400 text-xs mb-3">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <p class="text-slate-600 text-xs leading-relaxed italic">
-                "I recently used the Mikazo top-up service and I'm very satisfied. The process was fast, secure, and easy to understand. My top-up was delivered instantly without any issues. Customer support was also helpful."
-            </p>
         </div>
+    </div>
 
-        <div class="text-center mt-6">
-            <button class="border-2 border-blue-600 text-blue-600 font-bold text-xs tracking-wider px-6 py-3 rounded-xl inline-flex items-center space-x-2 hover:bg-blue-50 transition">
-                <span>VIEW ALL REVIEWS</span> <i class="fa-solid fa-arrow-right"></i>
-            </button>
-        </div>
-    </section>
-
-    <!-- WHY CHOOSE US SECTION (As seen in Screenshot_20260602-183017.png & Screenshot_20260602-183024.png) -->
-    <section class="px-5 py-14 max-w-md mx-auto">
-        <div class="text-center mb-10">
-            <span class="text-xs font-bold text-blue-600 tracking-widest uppercase">— WHY CHOOSE US —</span>
-            <h2 class="text-3xl font-extrabold text-slate-900 mt-1 leading-tight">The Best Free Fire <span class="text-cyan-500">Top-Up Experience</span> in Sri Lanka</h2>
-            <p class="text-slate-500 text-sm mt-3 leading-relaxed">
-                Discover why thousands of gamers trust MIKAZO TOP UP for instant, cheap, and secure top-ups. We are dedicated to providing the fastest service for Free Fire, Garena Shells, and many other popular games.
-            </p>
-        </div>
-
-        <div class="space-y-6">
-            <!-- Feature 01 -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative overflow-hidden">
-                <div class="absolute right-4 top-2 text-7xl font-black text-slate-50 opacity-80 select-none">01</div>
-                <div class="w-12 h-12 rounded-2xl bg-blue-500 text-white flex items-center justify-center text-xl shadow-md shadow-blue-500/20 mb-4 relative z-10">
-                    <i class="fa-solid fa-bolt"></i>
+    <main>
+        
+        <section id="highlights">
+            <h2>FIFA World Cup Video Highlights</h2>
+            <div class="highlights-grid">
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/fcnDmrtj6Sk" allowfullscreen></iframe>
+                    </div>
+                    <div class="card-info">
+                        <h4>Shakira, Burna Boy - Dai Dai</h4>
+                        <p>Official promotional performance highlight tracking tournament rhythm.</p>
+                    </div>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2 relative z-10">Instant Automated Delivery</h3>
-                <p class="text-slate-500 text-xs leading-relaxed relative z-10">Our fully automated system delivers Free Fire diamonds and Garena Shells directly to your account in under 2 seconds after payment. No waiting — just gaming.</p>
-            </div>
 
-            <!-- Feature 02 -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative overflow-hidden">
-                <div class="absolute right-4 top-2 text-7xl font-black text-slate-50 opacity-80 select-none">02</div>
-                <div class="w-12 h-12 rounded-2xl bg-cyan-500 text-white flex items-center justify-center text-xl shadow-md shadow-cyan-500/20 mb-4 relative z-10">
-                    <i class="fa-solid fa-tags"></i>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/afiNbSxg7aw" allowfullscreen></iframe>
+                    </div>
+                    <div class="card-info">
+                        <h4>Nora Fatehi, Vegedream - Siir Siir</h4>
+                        <p>Official matchday event soundtrack and peak action visual reel compilation.</p>
+                    </div>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2 relative z-10">Unbeatable Local Prices</h3>
-                <p class="text-slate-500 text-xs leading-relaxed relative z-10">We offer the cheapest prices for diamonds and shells in Sri Lanka. Get more for your money and enjoy exclusive discounts available only at MIKAZO TOP UP.</p>
-            </div>
 
-            <!-- Feature 03 -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm relative overflow-hidden">
-                <div class="absolute right-4 top-2 text-7xl font-black text-slate-50 opacity-80 select-none">03</div>
-                <div class="w-12 h-12 rounded-2xl bg-indigo-500 text-white flex items-center justify-center text-xl shadow-md shadow-indigo-500/20 mb-4 relative z-10">
-                    <i class="fa-solid fa-shield-halved"></i>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/pRpeEdMmmQ0" allowfullscreen></iframe>
+                    </div>
+                    <div class="card-info">
+                        <h4>Shakira - Waka Waka (This Time for Africa)</h4>
+                        <p>Historic peak classic anthem visual recap and legendary match highlight lookback.</p>
+                    </div>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2 relative z-10">Secure & Trusted Service</h3>
-                <p class="text-slate-500 text-xs leading-relaxed relative z-10">Top up with confidence using UID only — no password required. We support multiple secure local payment methods including Cards, LankaQR, and Binance.</p>
+
             </div>
-        </div>
+        </section>
 
-        <p class="text-center text-slate-600 text-sm leading-relaxed mt-8 bg-white border border-slate-100 rounded-2xl p-5 shadow-sm">
-            Whether you're a casual player or a competitive gamer, we've got you covered. Explore our exciting reseller opportunities to start earning, or simply top up now and power up your gaming journey!
-        </p>
-    </section>
-
-    <!-- RESELLER PROGRAM (As seen in Screenshot_20260602-183039.jpg, Screenshot_20260602-183045.jpg & Screenshot_20260602-183045_2.jpg) -->
-    <section class="bg-slate-900 text-white px-5 py-14 max-w-md mx-auto text-center relative overflow-hidden">
-        <div class="mb-10">
-            <span class="text-xs font-bold text-cyan-400 tracking-widest uppercase">— PARTNER WITH US —</span>
-            <h2 class="text-3xl font-extrabold text-white mt-1">Reseller <span class="text-cyan-400">Program</span></h2>
-            <p class="text-slate-400 text-sm mt-2">Join our network and start earning competitive commissions today</p>
-        </div>
-
-        <div class="space-y-6">
-            <!-- Become a Reseller Block -->
-            <div class="bg-slate-800/60 border border-slate-700/50 rounded-3xl p-6 flex flex-col items-center">
-                <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-cyan-500/10">
-                    <i class="fa-solid fa-user-plus"></i>
-                </div>
-                <h3 class="text-lg font-bold text-white mb-2">Become a Reseller</h3>
-                <p class="text-slate-400 text-xs leading-relaxed mb-6">Get wholesale prices and exclusive benefits. Earn competitive commissions on every top-up you sell.</p>
-                <button class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold text-xs tracking-wider px-6 py-3 rounded-xl flex items-center space-x-2 shadow-lg shadow-cyan-500/20">
-                    <span>REGISTER NOW</span> 👑
-                </button>
+        <section id="fixtures">
+            <h2>Match Information & Group Fixtures</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Match #</th>
+                            <th>Competing Teams</th>
+                            <th>Stadium Venue / Location</th>
+                            <th>Calendar Date</th>
+                            <th>Local Kickoff Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge">Match 01</span></td>
+                            <td class="vs-teams">United States vs. Morocco</td>
+                            <td>Azteca Stadium, Mexico City</td>
+                            <td>June 11, 2026</td>
+                            <td>17:00 local</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">Match 02</span></td>
+                            <td class="vs-teams">Canada vs. France</td>
+                            <td>BC Place, Vancouver</td>
+                            <td>June 12, 2026</td>
+                            <td>19:30 local</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">Match 03</span></td>
+                            <td class="vs-teams">Mexico vs. Argentina</td>
+                            <td>MetLife Stadium, New York/New Jersey</td>
+                            <td>June 13, 2026</td>
+                            <td>16:00 local</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">Match 04</span></td>
+                            <td class="vs-teams">Spain vs. Brazil</td>
+                            <td>SoFi Stadium, Los Angeles</td>
+                            <td>June 14, 2026</td>
+                            <td>20:00 local</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">Match 05</span></td>
+                            <td class="vs-teams">England vs. Germany</td>
+                            <td>AT&T Stadium, Dallas</td>
+                            <td>June 15, 2026</td>
+                            <td>18:00 local</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </section>
 
-            <!-- Reseller Login Block -->
-            <div class="bg-slate-800/60 border border-slate-700/50 rounded-3xl p-6 flex flex-col items-center">
-                <div class="w-14 h-14 rounded-full bg-cyan-500 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-cyan-500/10">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                </div>
-                <h3 class="text-lg font-bold text-white mb-2">Reseller Login</h3>
-                <p class="text-slate-400 text-xs leading-relaxed mb-6">Already a reseller? Access your dashboard to manage orders, track sales and monitor your earnings.</p>
-                <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold text-xs tracking-wider px-8 py-3 rounded-xl flex items-center space-x-2 transition shadow-lg shadow-cyan-500/10">
-                    <span>LOGIN</span> <i class="fa-solid fa-right-to-bracket text-xs"></i>
-                </button>
-            </div>
+    </main>
+
+    <div class="audio-player-widget">
+        <div class="widget-controls">
+            <button id="skip-audio-btn" onclick="advanceAudioPlaylist()" title="Skip to next track">⏭️</button>
         </div>
-    </section>
-
-    <!-- CALL TO ACTION FOOTER (As seen in Screenshot_20260602-183045_2.jpg) -->
-    <section class="bg-white px-5 py-12 max-w-md mx-auto text-center border-t border-slate-100">
-        <div class="bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-500 text-white rounded-3xl p-8 shadow-xl shadow-blue-500/10">
-            <h3 class="text-2xl font-extrabold mb-2">Ready to Get Started?</h3>
-            <p class="text-blue-100 text-xs leading-relaxed mb-6">Join thousands of satisfied customers and get your game top-ups today!</p>
-            <button class="bg-white text-blue-600 font-bold text-sm px-6 py-3.5 rounded-xl shadow-md inline-flex items-center space-x-2 hover:bg-slate-50 transition">
-                <span>SHOP NOW</span> <i class="fa-solid fa-arrow-right"></i>
-            </button>
+        <div class="widget-info">
+            <p>Stadium Radio (Playing Background)</p>
+            <h5 id="current-track-title">Loading Stadium Anthems...</h5>
         </div>
+    </div>
 
-   </section>
-<!-- Mikazo Top Up AI -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-48c19656-a3c6-4ccc-a76b-0e48d99b4268" data-elfsight-app-lazy></div>
-        <p class="text-[11px] text-slate-400 mt-8">&copy; 2026 MIKAZO TOP UP. All digital rights reserved.</p>
-    </section>
+    <footer>
+        <p>&copy; 2026 <span>WORLD OF FOOTBALL</span> Arena. All Rights Reserved.</p>
+    </footer>
 
+    <script>
+        // --- 1. Dynamic Live Tournament Countdown Configuration ---
+        // Setting Target Match Kickoff to June 11, 2026 at 17:00:00
+        const targetedKickoffDate = new Date("June 11, 2026 17:00:00").getTime();
+
+        const runTimerEvaluation = setInterval(function() {
+            const timeRightNow = new Date().getTime();
+            const mathematicalDistance = targetedKickoffDate - timeRightNow;
+
+            // Calculations parsing mathematical distance into time parameters
+            const computationalDays = Math.floor(mathematicalDistance / (1000 * 60 * 60 * 24));
+            const computationalHours = Math.floor((mathematicalDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const computationalMinutes = Math.floor((mathematicalDistance % (1000 * 60 * 60)) / (1000 * 60));
+            const computationalSeconds = Math.floor((mathematicalDistance % (1000 * 60)) / 1000);
+
+            // Output structural content injections safely
+            document.getElementById("days").innerText = computationalDays < 10 ? "0" + computationalDays : computationalDays;
+            document.getElementById("hours").innerText = computationalHours < 10 ? "0" + computationalHours : computationalHours;
+            document.getElementById("minutes").innerText = computationalMinutes < 10 ? "0" + computationalMinutes : computationalMinutes;
+            document.getElementById("seconds").innerText = computationalSeconds < 10 ? "0" + computationalSeconds : computationalSeconds;
+
+            // Handle post-timer expiration fallback parameters
+            if (mathematicalDistance < 0) {
+                clearInterval(runTimerEvaluation);
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                document.querySelector(".countdown-container h3).innerText = "Tournament is Live!";
+            }
+        }, 1000);
+
+
+        // --- 2. Advanced Audio Autoplay Playlist Component Engine ---
+        // YouTube Video Track Array IDs matching requested songs to parse directly inside invisible Audio API containers.
+        const structuralAudioPlaylistIds = [
+            { id: "fcnDmrtj6Sk", title: "Shakira & Burna Boy - Dai Dai" },
+            { id: "pRpeEdMmmQ0", title: "Shakira - Waka Waka (Official Anthem)" },
+            { id: "a3Ue-LN5B9U", title: "Sai Abhyankkar - Aasa Kooda" },
+            { id: "afiNbSxg7aw", title: "Nora Fatehi & Vegedream - Siir Siir" },
+            { id: "dOpW7ewpJwI", title: "Smokio ft. Dinesh Gamage - Nasuna" }
+        ];
+
+        let indexPointerForPlaylist = 0;
+        let globalYouTubeAudioObject = null;
+
+        // Synchronous integration hook processing once IFrame API loading completes
+        function initializeStadium() {
+            // Dismiss Overlay screen
+            const maskObject = document.getElementById("welcome-overlay");
+            maskObject.style.opacity = "0";
+            setTimeout(() => maskObject.style.display = "none", 600);
+
+            // Asynchronously append programmatic anchor to load scripts safely 
+            const tagElement = document.createElement('script');
+            tagElement.src = "https://www.youtube.com/iframe_api";
+            const prospectiveFirstScriptTag = document.getElementsByTagName('script')[0];
+            prospectiveFirstScriptTag.parentNode.insertBefore(tagElement, prospectiveFirstScriptTag);
+        }
+
+        // Native callback function executed right after the script resolves successfully
+        function onYouTubeIframeAPIReady() {
+            instantiateAudioPipelinePlayer(indexPointerForPlaylist);
+        }
+
+        function instantiateAudioPipelinePlayer(trackIndex) {
+            const chosenTrack = structuralAudioPlaylistIds[trackIndex];
+            document.getElementById("current-track-title").innerText = chosenTrack.title;
+
+            // Purge historical elements from DOM layout inside container
+            const containerNode = document.getElementById("audio-pipeline");
+            containerNode.innerHTML = "<div id='active-audio-iframe-placeholder'></div>";
+
+            // Instantiate native hidden YouTube constructor purely tracking audio events
+            globalYouTubeAudioObject = new YT.Player('active-audio-iframe-placeholder', {
+                height: '0',
+                width: '0',
+                videoId: chosenTrack.id,
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'fs': 0,
+                    'rel': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onReady': onPlayerStateReadyEvent,
+                    'onStateChange': onPlayerStateChangedEvent
+                }
+            });
+        }
+
+        function onPlayerStateReadyEvent(event) {
+            event.target.playVideo();
+        }
+
+        // Automatic Sequential Tracking: Advancing tracks upon current song completion
+        function onPlayerStateChangedEvent(event) {
+            // YT.PlayerState.ENDED explicitly reaches value 0
+            if (event.data === 0) {
+                advanceAudioPlaylist();
+            }
+        }
+
+        function advanceAudioPlaylist() {
+            indexPointerForPlaylist++;
+            if (indexPointerForPlaylist >= structuralAudioPlaylistIds.length) {
+                indexPointerForPlaylist = 0; // Rotate list over circularly back to initial song
+            }
+            instantiateAudioPipelinePlayer(indexPointerForPlaylist);
+        }
+    </script>
 </body>
 </html>
